@@ -5,21 +5,10 @@ import { AppRegistry, AsyncStorage } from 'react-native';
 import { HeaderApp } from './app/Template/Header/HeaderApp';
 import { FooterApp } from './app/Template/Footer/FooterApp';
 
-import HomeScreen from './src/HomeScreen/HomeScreen';
-import ChatScreen from './src/ChatScreen/ChatScreen';
-import ProfileScreen from './src/ProfileScreen/ProfileScreen';
-
-import DrawerNavigator from './src/DrawerNavigator'
-
-import { StackNavigator } from 'react-navigation';
-import { YellowBox } from 'react-native'
-
 export default class App extends Component {
 
   constructor() {
     super();
-    
-    YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated'])
   }
 
   state = {
@@ -126,25 +115,64 @@ export default class App extends Component {
 
   render() {
     return (
-      <AppStackNavigator/> 
+      <Container>
+        <HeaderApp />
+
+        <Content>
+          <Text>{this.state.url}</Text>
+          <Button onPress={this.getToken}><Text>GetToken</Text></Button>
+
+          <Button onPress={this.readData}><Text>ReadData</Text></Button>
+
+          <Button iconLeft onPress={this.getListCountry}>
+            <Icon name='home' />
+            <Text>GetCountryList</Text>
+          </Button>
+
+          <Button iconLeft onPress={this.getListAirport}>
+            <Icon name='home' />
+            <Text>GetAirportList</Text>
+          </Button>
+
+
+          <Button iconLeft onPress={() => {
+            this.setState({
+              countryList: []
+            });
+          }}>
+            <Icon name='home' />
+            <Text>Clear</Text>
+          </Button>
+
+          <Text>{this.state.result}</Text>
+
+          <Content padder>
+
+            <List dataArray={this.state.countryList}
+              renderRow={(country) =>
+                <ListItem>
+                  <Text>{country.country_id}</Text>
+                  <Text note>{country.country_name}</Text>
+                  <Text note>{country.country_areacode}</Text>
+                </ListItem>
+              }>
+            </List>
+
+            <List dataArray={this.state.airportList}
+              renderRow={(data) =>
+                <ListItem>
+                  <Text>{data.airport_name}</Text>
+                  <Text>{data.country_name}</Text>
+                  <Text>({data.airport_code})</Text>
+                </ListItem>
+              }>
+            </List>
+
+          </Content>
+        </Content>
+
+        <FooterApp />
+      </Container>
     );
   }
 }
-
-const AppStackNavigator = new StackNavigator({
-  HomeScreen: {
-    screen: HomeScreen,
-    navigationOptions: {
-      header: null
-    }
-  },
-  ChatScreen: {
-    screen: ChatScreen
-  },
-  ProfileScreen: {
-    screen: ProfileScreen
-  },
-  DrawerNavigator: {
-    screen: DrawerNavigator
-  }
-})
