@@ -2,25 +2,10 @@ import React, { Component, FlatList } from 'react';
 import { Container, Header, Content, Footer, FooterTab, Button, Icon, Text, Badge, Left, Body, Right, Title, Accordion, ListItem, List, Switch } from 'native-base';
 import { AppRegistry, AsyncStorage } from 'react-native';
 
-import { HeaderApp } from './app/Template/Header/HeaderApp';
-import { FooterApp } from './app/Template/Footer/FooterApp';
 
-import HomeScreen from './src/HomeScreen/HomeScreen';
-import ChatScreen from './src/ChatScreen/ChatScreen';
-import ProfileScreen from './src/ProfileScreen/ProfileScreen';
-
-import DrawerNavigator from './src/DrawerNavigator'
-
-import { StackNavigator } from 'react-navigation';
 import { YellowBox } from 'react-native'
 
 export default class App extends Component {
-
-  constructor() {
-    super();
-    
-    YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated'])
-  }
 
   state = {
     url: "https://api-sandbox.tiket.com/apiv1/payexpress?method=getToken&output=json&secretkey=686cefadde5ffe8c45165ad590c861c9",
@@ -130,21 +115,3 @@ export default class App extends Component {
     );
   }
 }
-
-const AppStackNavigator = new StackNavigator({
-  HomeScreen: {
-    screen: HomeScreen,
-    navigationOptions: {
-      header: null
-    }
-  },
-  ChatScreen: {
-    screen: ChatScreen
-  },
-  ProfileScreen: {
-    screen: ProfileScreen
-  },
-  DrawerNavigator: {
-    screen: DrawerNavigator
-  }
-})
