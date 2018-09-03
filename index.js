@@ -141,8 +141,8 @@ global.ExSearchPassenger = ExSearchPassenger;
 global.ExSearchClass = ExSearchClass;
 
 global.AppStackNavigator = new StackNavigator({
-    EatScreen: {
-        screen: EatScreen
+    HomeScreen: {
+        screen: HomeScreen
     },
     HomeScreen: {
         screen: HomeScreen
